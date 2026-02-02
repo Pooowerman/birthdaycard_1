@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <canvas id="fireworks" class="fireworks-canvas"></canvas>
+
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <div class="container">
+        <h1>Happy Birthday!</h1>
+
+        <div class="cake">
+            <div class="plate"></div>
+
+            <div class="layer layer-bottom">
+                <div class="icing"></div>
+            </div>
+
+            <div class="layer layer-middle">
+                <div class="icing"></div>
+            </div>
+
+            <div class="layer layer-top">
+                <div class="icing"></div>
+                <div class="cherry"></div>
+                <div class="cherry"></div>
+            </div>
+
+            <div class="candle">
+                <div class="flame" id="flame" onclick="blowCandle()"></div>
+                <div class="smoke"></div>
+            </div>
+        </div>
+
+        <div class="instruction">
+            (點擊燭火來吹熄蠟燭 / Click the flame to blow it out!)
+        </div>
+    </div>
+
+    <!-- Wish Modal -->
+    <div id="wish-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Make a Wish ✨</h2>
+            <input type="text" id="wish-input" placeholder="Enter your wish here..." autocomplete="off">
+            <button onclick="submitWish()">Send Wish</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

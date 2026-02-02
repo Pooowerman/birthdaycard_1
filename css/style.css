@@ -1,0 +1,458 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&family=Pacifico&display=swap');
+
+:root {
+    --bg-color: #1a1a2e;
+    --cake-base: #f0932b;
+    --cake-shadow: #d35400;
+    --icing: #ecf0f1;
+    --flame-core: #fff;
+    --flame-outer: #f1c40f;
+    --text-color: #ecf0f1;
+    --plate-color: #95a5a6;
+}
+
+body {
+    background: radial-gradient(circle at center, #2c3e50 0%, #000000 100%);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-color);
+}
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 1.5s ease-out forwards;
+    background: linear-gradient(to right, #ff9966, #ff5e62);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 15px rgba(255, 94, 98, 0.3);
+}
+
+/* Cake Structure */
+.cake {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.plate {
+    width: 270px;
+    height: 10px;
+    background: var(--plate-color);
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.layer {
+    position: absolute;
+    background: var(--cake-base);
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    box-shadow: inset -15px 0 0 rgba(0, 0, 0, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.layer-bottom {
+    bottom: 10px;
+    height: 80px;
+    width: 100%;
+    background: linear-gradient(to right, #e67e22, #f39c12);
+}
+
+.layer-middle {
+    bottom: 90px;
+    height: 70px;
+    width: 80%;
+    left: 10%;
+    background: linear-gradient(to right, #d35400, #e67e22);
+}
+
+.layer-top {
+    bottom: 160px;
+    height: 60px;
+    width: 60%;
+    left: 20%;
+    background: linear-gradient(to right, #e67e22, #f39c12);
+}
+
+/* Icing */
+.icing {
+    position: absolute;
+    top: 0;
+    background: var(--icing);
+    width: 100%;
+    height: 15px;
+    border-radius: 10px 10px 50px 50px;
+    opacity: 0.9;
+}
+
+.icing:before,
+.icing:after {
+    content: '';
+    position: absolute;
+    background: var(--icing);
+    width: 20px;
+    height: 30px;
+    border-radius: 0 0 20px 20px;
+    top: 5px;
+}
+
+.icing:before {
+    left: 20%;
+    height: 25px;
+}
+
+.icing:after {
+    right: 20%;
+    height: 20px;
+}
+
+.layer-top .icing {
+    border-radius: 10px 10px 30px 30px;
+}
+
+/* Candles */
+.candle {
+    position: absolute;
+    bottom: 220px;
+    /* Adjusted based on top layer */
+    width: 10px;
+    height: 35px;
+    background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff5e62 5px, #ff5e62 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.flame {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(ellipse at bottom, var(--flame-core) 20%, var(--flame-outer));
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 10px #f39c12, 0 0 20px #e67e22;
+    animation: flicker 1.5s infinite alternate;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.flame.out {
+    opacity: 0;
+    animation: none;
+}
+
+/* Smoke effect for blown out candle */
+.smoke {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    width: 4px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(2px);
+}
+
+.flame.out+.smoke {
+    animation: smokeRise 1s forwards;
+}
+
+/* Cherry Decoration */
+.cherry {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #c0392b;
+    border-radius: 50%;
+    top: -8px;
+    box-shadow: inset -2px -2px rgba(0, 0, 0, 0.3);
+}
+
+.cherry:nth-child(1) {
+    left: 10%;
+}
+
+.cherry:nth-child(2) {
+    right: 10%;
+}
+
+@keyframes flicker {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) scale(0.95);
+        opacity: 0.8;
+    }
+}
+
+@keyframes smokeRise {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(2);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Confetti */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #f1c40f;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.instruction {
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    animation: fadeInDown 1.5s 1s ease-out forwards;
+}
+
+/* Fireworks Canvas */
+.fireworks-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Allow clicks to pass through */
+    z-index: 99;
+    /* Below confetti, above everything else */
+}
+
+/* Firework Photo */
+.firework-photo {
+    position: absolute;
+    width: 150px;
+    /* Adjust size as needed */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 98;
+    /* Just below fireworks canvas but above background */
+    transform: translate(-50%, -50%);
+    /* Center on the coordinate */
+    opacity: 0;
+    animation: photoFade 3s ease-out forwards;
+}
+
+@keyframes photoFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+/* Original Style Restored */
+.firework-photo {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 98;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    /* Use original 3s animation which includes fade out */
+    animation: photoFade 3s ease-out forwards;
+}
+
+.firework-video {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 98;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    /* Video pops in and stays until JS removes it */
+    animation: videoPop 0.5s ease-out forwards;
+    transition: opacity 0.5s;
+}
+
+@keyframes videoPop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal.hidden .modal-content {
+    transform: scale(0.8);
+}
+
+.modal-content h2 {
+    color: #fff;
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.modal-content input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 50px;
+    border: none;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.modal-content button {
+    padding: 10px 30px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(to right, #ff9966, #ff5e62);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.modal-content button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 94, 98, 0.4);
+}
